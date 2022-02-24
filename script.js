@@ -55,7 +55,7 @@ const run = () => {
       const [, name, domain, tld] = args.map((x) =>
         typeof x !== 'string' ? x : x.slice(0, 1) + '...'
       )
-      return `<${name}@${domain}.${tld}> wrote:`
+      return `<${name}@ ${domain} .${tld}> wrote:`
     })
   }
 
