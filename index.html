@@ -18,7 +18,7 @@
         <h4>Input:</h4>
         <textarea id="input" placeholder="Paste your gmail thread here &#10;&#10; (Hit Reply in a Gmail thread > Select All > Copy)"></textarea>
 
-        <h4>Output:</h4>
+        <h4>Output: <button id="copy">Copy</button></h4>
         <textarea id="output" disabled></textarea>
 
         <script src="/script.js"></script>
@@ -37,6 +37,10 @@
             #output {
                 cursor: not-allowed;
                 resize: none;
+            }
+
+            #copy {
+                font-size: 14px;
             }
         </style>
     </body>

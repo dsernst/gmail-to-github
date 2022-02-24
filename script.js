@@ -3,9 +3,12 @@ const $output = document.getElementById('output')
 const $reverse = document.getElementById('reverse')
 const $obfuscateEmails = document.getElementById('obfuscateEmails')
 const $indentBodies = document.getElementById('indentBodies')
+const $copy = document.getElementById('copy')
+
+let cleaned
 
 const run = () => {
-  let cleaned = $input.value
+  cleaned = $input.value
 
   // Strip out initial lines breaks
   cleaned = cleaned.trim()
@@ -68,3 +71,12 @@ $input.oninput = run
 $reverse.onchange = run
 $obfuscateEmails.onchange = run
 $indentBodies.onchange = run
+
+// Copy results to clipboard
+$copy.onclick = () => {
+  navigator.clipboard.writeText(cleaned)
+  $copy.innerText = 'Copied!'
+  setTimeout(() => {
+    $copy.innerText = 'Copy'
+  }, 2000)
+}
