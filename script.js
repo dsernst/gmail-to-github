@@ -1,4 +1,8 @@
-const $input = document.getElementById("input");
-const $output = document.getElementById("output");
+const $input = document.getElementById('input')
+const $output = document.getElementById('output')
 
-$output.innerText = "JS is working!";
+$input.oninput = () => {
+  const input = $input.value
+
+  $output.innerHTML = input
+}
