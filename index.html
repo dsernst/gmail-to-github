@@ -4,10 +4,21 @@
     </head>
     <body>
         <h1>Gmail to Github Issue</h1>
-        <p>Paste your gmail thread in here:</p>
-        <textarea id="input"></textarea>
 
-        <p>Output:</p>
+        <p>This tool helps you quickly reformat a Gmail thread for copying into Github Issues.</p>
+
+        <h4>Options:</h4>
+        <input type="checkbox" id="reverse" name="reverse" checked>
+        <label for="reverse">Reverse order</label><br />
+        <input type="checkbox" id="obfuscateEmails" name="obfuscateEmails" checked>
+        <label for="obfuscateEmails">Obfuscate emails</label><br />
+        <input type="checkbox" id="indentBodies" name="indentBodies" checked>
+        <label for="indentBodies">Indent message bodies</label><br />
+
+        <h4>Input:</h4>
+        <textarea id="input" placeholder="Paste your gmail thread here &#10;&#10; (Hit Reply in a Gmail thread > Select All > Copy)"></textarea>
+
+        <h4>Output:</h4>
         <textarea id="output" disabled></textarea>
 
         <script src="/script.js"></script>
@@ -21,6 +32,7 @@
                 width: 100%;
                 height: 20rem;
                 font-size: 14px;
+                padding: 4px;
             }
             #output {
                 cursor: not-allowed;
