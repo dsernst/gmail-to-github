@@ -4,15 +4,13 @@ const $reverse = document.getElementById('reverse')
 const $obfuscateEmails = document.getElementById('obfuscateEmails')
 const $indentBodies = document.getElementById('indentBodies')
 
-$input.oninput = () => {
-  const input = $input.value
+const run = () => {
+  let cleaned = $input.value
 
-  const emailRegEx = /<(\w+)@(\w+)\.(\w+)> wrote:/g
-
-  let cleaned = input
-
+  // Obfuscate emails
   if ($obfuscateEmails.checked) {
-    cleaned = input.replace(emailRegEx, (...args) => {
+    const emailRegEx = /<(\w+)@(\w+)\.(\w+)> wrote:/g
+    cleaned = cleaned.replace(emailRegEx, (...args) => {
       const [, name, domain, tld] = args.map((x) =>
         typeof x !== 'string' ? x : x.slice(0, 1) + '...'
       )
@@ -20,5 +18,10 @@ $input.oninput = () => {
     })
   }
 
+  // Output the results
   $output.innerHTML = cleaned
 }
+
+// Run on all the triggers
+$input.oninput = run
+$obfuscateEmails.onchange = run
