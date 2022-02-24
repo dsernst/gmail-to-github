@@ -7,6 +7,47 @@ const $indentBodies = document.getElementById('indentBodies')
 const run = () => {
   let cleaned = $input.value
 
+  // Strip out initial lines breaks
+  cleaned = cleaned.trim()
+
+  // Modify the messages
+  if ($reverse.checked || $indentBodies.checked) {
+    // Split the messages by the standard header line
+    const headerRegEx =
+      /(On \w{3}, \w{3} \d{1,2}, \d{4} at \d{2}:\d{2} [AP]M [\w ]+ <\w+@\w+\.\w+> wrote:)/g
+    let split = cleaned.split(headerRegEx).filter(Boolean) // (Remove empties)
+
+    // Indent non-header lines
+    if ($indentBodies.checked) {
+      split = split.map((section) => {
+        if (section.match(headerRegEx)) {
+          return section
+        } else {
+          return section
+            .trim()
+            .split('\n')
+            .map((line) => '> ' + line)
+            .join('\n')
+        }
+      })
+    }
+
+    // Now we'll rejoin them
+    const joined = []
+    split.forEach((section, index) => {
+      if (section.match(headerRegEx)) {
+        joined.push(section + '\n' + split[index + 1])
+      }
+    })
+
+    // Reverse the order
+    if ($reverse.checked) {
+      joined.reverse()
+    }
+
+    cleaned = joined.join('\n\n')
+  }
+
   // Obfuscate emails
   if ($obfuscateEmails.checked) {
     const emailRegEx = /<(\w+)@(\w+)\.(\w+)> wrote:/g
@@ -24,4 +65,6 @@ const run = () => {
 
 // Run on all the triggers
 $input.oninput = run
+$reverse.onchange = run
 $obfuscateEmails.onchange = run
+$indentBodies.onchange = run
