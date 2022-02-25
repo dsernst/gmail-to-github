@@ -17,7 +17,7 @@ const run = () => {
   if ($reverse.checked || $indentBodies.checked) {
     // Split the messages by the standard header line
     const headerRegEx =
-      /(On \w{3}, \w{3} \d{1,2}, \d{4} at \d{2}:\d{2} [AP]M [\w ]+ <\w+@\w+\.\w+> wrote:)/g
+      /(On \w{3}, \w{3} \d{1,2}, \d{4} at \d{1,2}:\d{2} [AP]M [\w ]+ <\w+@\w+\.\w+> wrote:)/g
     let split = cleaned.split(headerRegEx).filter(Boolean) // (Remove empties)
 
     // Indent non-header lines
