@@ -53,7 +53,7 @@ const run = () => {
 
   // Obfuscate emails
   if ($obfuscateEmails.checked) {
-    const emailRegEx = /<(\w+)@(\w+)\.(\w+)> wrote:/g
+    const emailRegEx = /<([\w\.]+)@(\w+)\.(\w+)> wrote:/g
     cleaned = cleaned.replace(emailRegEx, (...args) => {
       const [, name, domain, tld] = args.map((x) =>
         typeof x !== 'string' ? x : x.slice(0, 1) + '...'
